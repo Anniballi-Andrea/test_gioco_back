@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lxmls:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/style :: style}"></th:block>
+    <title>Map test</title>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <form method="get" action="/">
+            <div>
+                <button class="btn btn-primary" type="submit">Genera mappa</button>
+            </div>
+
+        </form>
+        <div class="container">
+            <div class="row ">
+                <div class="col-12">
+                    <div class="grid">
+
+                        <div th:each="y : ${#numbers.sequence(0, map.height - 1)}">
+
+                            <div th:each="x : ${#numbers.sequence(0, map.width - 1)}"
+                                th:class="'tile ' + ${map.tiles[y][x].terrain.name().toLowerCase()}">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+    <footer></footer>
+</body>
+
+</html>

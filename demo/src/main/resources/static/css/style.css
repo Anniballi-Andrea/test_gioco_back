@@ -1,0 +1,28 @@
+.grid {
+    display: inline-block;
+}
+
+.grid>div {
+    display: flex;
+}
+
+.tile {
+    width: 24px;
+    height: 24px;
+}
+
+.grass {
+    background: rgb(1, 194, 1);
+}
+
+.water {
+    background: blue;
+}
+
+.forest {
+    background: rgb(0, 70, 0);
+}
+
+.mountain {
+    background: gray;
+}
