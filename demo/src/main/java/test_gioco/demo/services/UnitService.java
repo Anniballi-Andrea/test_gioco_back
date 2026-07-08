@@ -7,6 +7,7 @@ import test_gioco.demo.classes.ResourceType;
 import test_gioco.demo.classes.Unit;
 import test_gioco.demo.classes.UnitType;
 import test_gioco.demo.classes.Warrior;
+import test_gioco.demo.classes.Wizard;
 
 @Service
 public class UnitService {
@@ -30,12 +31,18 @@ public class UnitService {
 
         switch (type) {
             case WARRIOR:
+
                 unit = new Warrior();
+                break;
+            case WIZARD:
+                unit = new Wizard();
+
                 break;
             default:
                 return null;
         }
 
+        unit.setType(type);
         unit.setId(nextUnitId++);
         unit.setX(x);
         unit.setY(y);

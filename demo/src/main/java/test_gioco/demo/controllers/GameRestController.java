@@ -65,6 +65,7 @@ public class GameRestController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         unitService.createUnit(gameState, dto.getType(), dto.getX(), dto.getY());
+
         return new ResponseEntity<>(gameState, HttpStatus.OK);
     }
 
