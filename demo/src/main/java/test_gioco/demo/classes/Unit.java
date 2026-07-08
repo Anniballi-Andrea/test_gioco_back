@@ -4,6 +4,8 @@ public class Unit {
 
     protected long id;
 
+    protected UnitType type;
+
     protected int x;
     protected int y;
 
@@ -31,6 +33,14 @@ public class Unit {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public UnitType getType() {
+        return type;
+    }
+
+    public void setType(UnitType type) {
+        this.type = type;
     }
 
     public int getX() {
