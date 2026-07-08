@@ -2,6 +2,7 @@ package test_gioco.demo.services;
 
 import org.springframework.stereotype.Service;
 
+import test_gioco.demo.classes.Archer;
 import test_gioco.demo.classes.GameState;
 import test_gioco.demo.classes.ResourceType;
 import test_gioco.demo.classes.Unit;
@@ -36,10 +37,12 @@ public class UnitService {
                 break;
             case WIZARD:
                 unit = new Wizard();
-
                 break;
             default:
                 return null;
+            case ARCHER:
+                unit = new Archer();
+                break;
         }
 
         unit.setType(type);

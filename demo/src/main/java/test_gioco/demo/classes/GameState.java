@@ -20,9 +20,9 @@ public class GameState {
         this.units = new ArrayList<>();
         this.currentTurn = 1;
         this.resources = new HashMap<>();
-        this.resources.put(ResourceType.RED_CRYSTAL, 100);
-        this.resources.put(ResourceType.BLUE_CRYSTAL, 100);
-        this.resources.put(ResourceType.GREEN_CRYSTAL, 100);
+        this.resources.put(ResourceType.RED_CRYSTAL, 50);
+        this.resources.put(ResourceType.BLUE_CRYSTAL, 50);
+        this.resources.put(ResourceType.GREEN_CRYSTAL, 50);
     }
 
     public UUID getGameId() {
