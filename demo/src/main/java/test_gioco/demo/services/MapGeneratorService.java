@@ -18,7 +18,6 @@ import test_gioco.demo.classes.Tile;
 @Service
 public class MapGeneratorService {
 
-    private final CombatService combatService;
     private static final int WIDTH = 80;
     private static final int HEIGHT = 80;
     private static final int TOTAL_TILES = WIDTH * HEIGHT;
@@ -29,10 +28,6 @@ public class MapGeneratorService {
     private static final double HILL_PERCENT = 0.15;
 
     private final Random random = new Random();
-
-    MapGeneratorService(CombatService combatService) {
-        this.combatService = combatService;
-    }
 
     private Tile[][] createGrid() {
         return new Tile[HEIGHT][WIDTH];
