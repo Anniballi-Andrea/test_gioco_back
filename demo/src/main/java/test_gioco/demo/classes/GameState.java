@@ -13,6 +13,7 @@ public class GameState {
     private final List<Unit> units;
     private int currentTurn;
     private final Map<ResourceType, Integer> resources;
+    private Portal portal;
 
     public GameState(MapGrid map) {
         this.gameId = UUID.randomUUID();
@@ -47,6 +48,14 @@ public class GameState {
 
     public Map<ResourceType, Integer> getResources() {
         return resources;
+    }
+
+    public Portal getPortal() {
+        return portal;
+    }
+
+    public void setPortal(Portal portal) {
+        this.portal = portal;
     }
 
 }

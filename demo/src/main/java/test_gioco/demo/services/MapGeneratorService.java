@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import test_gioco.demo.classes.Deposit;
 import test_gioco.demo.classes.MapGrid;
+import test_gioco.demo.classes.Portal;
 import test_gioco.demo.classes.ResourceType;
 import test_gioco.demo.classes.TerrainType;
 import test_gioco.demo.classes.Tile;
@@ -17,6 +18,7 @@ import test_gioco.demo.classes.Tile;
 @Service
 public class MapGeneratorService {
 
+    private final CombatService combatService;
     private static final int WIDTH = 80;
     private static final int HEIGHT = 80;
     private static final int TOTAL_TILES = WIDTH * HEIGHT;
@@ -27,6 +29,10 @@ public class MapGeneratorService {
     private static final double HILL_PERCENT = 0.15;
 
     private final Random random = new Random();
+
+    MapGeneratorService(CombatService combatService) {
+        this.combatService = combatService;
+    }
 
     private Tile[][] createGrid() {
         return new Tile[HEIGHT][WIDTH];
@@ -175,6 +181,21 @@ public class MapGeneratorService {
         generateDeposits(mapGrid);
 
         return mapGrid;
+    }
+
+    public Portal generatePortal(MapGrid mapGrid) {
+        while (true) {
+            int x = random.nextInt(WIDTH);
+            int y = random.nextInt(HEIGHT);
+
+            if (mapGrid.getTile(y, x).getTerrain() != TerrainType.WATER) {
+                if (mapGrid.getDeposit(y, x) != null) {
+                    mapGrid.removeDeposit(y, x);
+                }
+                return new Portal(x, y);
+            }
+
+        }
     }
 
     private static class Point {

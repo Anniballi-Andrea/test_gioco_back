@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import test_gioco.demo.classes.GameState;
 import test_gioco.demo.classes.MapGrid;
+import test_gioco.demo.classes.Portal;
 import test_gioco.demo.classes.Unit;
 import test_gioco.demo.dtos.AttackRequest;
 import test_gioco.demo.dtos.CreateUnitRequest;
@@ -47,7 +48,13 @@ public class GameRestController {
     @PostMapping("/start")
     public ResponseEntity<GameState> startGame() {
         MapGrid newMap = mapGeneratorService.generate();
+
         this.gameState = new GameState(newMap);
+
+        Portal portal = mapGeneratorService.generatePortal(newMap);
+
+        this.gameState.setPortal(portal);
+
         return new ResponseEntity<>(gameState, HttpStatus.OK);
     }
 
