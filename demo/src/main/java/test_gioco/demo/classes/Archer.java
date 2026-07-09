@@ -9,7 +9,7 @@ public class Archer extends Unit {
         movement = 5;
         remainingMovement = 5;
         attackRange = 4;
-        minExtractionPower = 1;
-        maxExtractionPower = 5;
+        minExtractionPower = 2;
+        maxExtractionPower = 8;
     }
 }

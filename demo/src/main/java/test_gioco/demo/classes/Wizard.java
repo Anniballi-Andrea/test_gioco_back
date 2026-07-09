@@ -11,6 +11,6 @@ public class Wizard extends Unit {
         remainingMovement = 4;
         attackRange = 3;
         minExtractionPower = 1;
-        maxExtractionPower = 10;
+        maxExtractionPower = 5;
     }
 }

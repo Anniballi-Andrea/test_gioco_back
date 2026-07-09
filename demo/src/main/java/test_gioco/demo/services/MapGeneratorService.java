@@ -17,8 +17,8 @@ import test_gioco.demo.classes.Tile;
 @Service
 public class MapGeneratorService {
 
-    private static final int WIDTH = 50;
-    private static final int HEIGHT = 50;
+    private static final int WIDTH = 80;
+    private static final int HEIGHT = 80;
     private static final int TOTAL_TILES = WIDTH * HEIGHT;
 
     private static final double WATER_PERCENT = 0.15;
@@ -124,24 +124,24 @@ public class MapGeneratorService {
     private void generateDeposits(MapGrid mapGrid) {
         for (ResourceType type : ResourceType.values()) {
 
-            int depositsToSpawn = random.nextInt(6) + 5;
+            int depositsToSpawn = random.nextInt(12) + 8;
             int spawned = 0;
 
             while (spawned < depositsToSpawn) {
                 int rx = random.nextInt(WIDTH);
                 int ry = random.nextInt(HEIGHT);
 
-                if (mapGrid.getDeposit(ry, rx) == null && mapGrid.getTiles(ry, rx).getTerrain() != TerrainType.WATER) {
+                if (mapGrid.getDeposit(ry, rx) == null && mapGrid.getTile(ry, rx).getTerrain() != TerrainType.WATER) {
                     int amount = random.nextInt(51) + 50;
-                    if (mapGrid.getTiles(ry, rx).getTerrain() == TerrainType.MOUNTAIN) {
+                    if (mapGrid.getTile(ry, rx).getTerrain() == TerrainType.MOUNTAIN) {
                         Deposit newDeposit = new Deposit(ResourceType.RED_CRYSTAL, amount);
                         mapGrid.setDeposit(ry, rx, newDeposit);
 
-                    } else if (mapGrid.getTiles(ry, rx).getTerrain() == TerrainType.FOREST) {
+                    } else if (mapGrid.getTile(ry, rx).getTerrain() == TerrainType.FOREST) {
                         Deposit newDeposit = new Deposit(ResourceType.GREEN_CRYSTAL, amount);
                         mapGrid.setDeposit(ry, rx, newDeposit);
 
-                    } else if (mapGrid.getTiles(ry, rx).getTerrain() == TerrainType.HILL) {
+                    } else if (mapGrid.getTile(ry, rx).getTerrain() == TerrainType.HILL) {
                         Deposit newDeposit = new Deposit(ResourceType.BLUE_CRYSTAL, amount);
                         mapGrid.setDeposit(ry, rx, newDeposit);
                     } else {

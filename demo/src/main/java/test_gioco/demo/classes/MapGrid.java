@@ -22,7 +22,7 @@ public class MapGrid {
         return height;
     }
 
-    public Tile getTiles(int y, int x) {
+    public Tile getTile(int y, int x) {
         return tiles[y][x];
     }
 
