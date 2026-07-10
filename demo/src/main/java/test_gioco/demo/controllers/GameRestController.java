@@ -17,6 +17,7 @@ import test_gioco.demo.dtos.AttackRequest;
 import test_gioco.demo.dtos.CreateUnitRequest;
 import test_gioco.demo.dtos.MiningRequest;
 import test_gioco.demo.dtos.MoveRequest;
+import test_gioco.demo.exeptions.SpawnException;
 import test_gioco.demo.services.CombatService;
 import test_gioco.demo.services.MapGeneratorService;
 import test_gioco.demo.services.MiningService;
@@ -67,13 +68,21 @@ public class GameRestController {
     }
 
     @PostMapping("/units")
-    public ResponseEntity<GameState> spawnUnit(@RequestBody CreateUnitRequest dto) {
-        if (gameState == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        unitService.createUnit(gameState, dto.getType(), dto.getX(), dto.getY());
+    public ResponseEntity<?> spawnUnit(@RequestBody CreateUnitRequest dto) {
 
-        return new ResponseEntity<>(gameState, HttpStatus.OK);
+        if (gameState == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        try {
+            unitService.createUnit(gameState, dto.getType(), dto.getX(), dto.getY());
+            return ResponseEntity.ok(gameState);
+
+        } catch (SpawnException e) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/move")
