@@ -4,11 +4,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 
-import test_gioco.demo.classes.Deposit;
 import test_gioco.demo.classes.GameState;
-import test_gioco.demo.classes.MapGrid;
-import test_gioco.demo.classes.ResourceType;
-import test_gioco.demo.classes.Unit;
+import test_gioco.demo.classes.map.Deposit;
+import test_gioco.demo.classes.map.MapGrid;
+import test_gioco.demo.classes.units.Unit;
+import test_gioco.demo.enums.ResourceType;
 
 @Service
 public class MiningService {

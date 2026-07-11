@@ -1,4 +1,6 @@
-package test_gioco.demo.classes;
+package test_gioco.demo.classes.map;
+
+import test_gioco.demo.enums.TerrainType;
 
 public class Tile {
 

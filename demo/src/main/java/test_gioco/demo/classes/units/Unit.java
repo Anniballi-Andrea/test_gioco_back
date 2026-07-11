@@ -1,4 +1,6 @@
-package test_gioco.demo.classes;
+package test_gioco.demo.classes.units;
+
+import test_gioco.demo.enums.UnitType;
 
 public class Unit {
 

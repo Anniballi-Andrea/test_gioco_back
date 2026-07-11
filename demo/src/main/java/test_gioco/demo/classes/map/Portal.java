@@ -1,4 +1,4 @@
-package test_gioco.demo.classes;
+package test_gioco.demo.classes.map;
 
 public class Portal {
 

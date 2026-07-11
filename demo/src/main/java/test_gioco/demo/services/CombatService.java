@@ -3,7 +3,7 @@ package test_gioco.demo.services;
 import org.springframework.stereotype.Service;
 
 import test_gioco.demo.classes.GameState;
-import test_gioco.demo.classes.Unit;
+import test_gioco.demo.classes.units.Unit;
 
 @Service
 public class CombatService {

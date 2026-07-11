@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import test_gioco.demo.classes.MapGrid;
+import test_gioco.demo.classes.map.MapGrid;
 import test_gioco.demo.services.MapGeneratorService;
 
 @RestController

@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import test_gioco.demo.classes.map.MapGrid;
+import test_gioco.demo.classes.map.Portal;
+import test_gioco.demo.classes.units.Unit;
+import test_gioco.demo.enums.ResourceType;
+
 public class GameState {
 
     private final UUID gameId;

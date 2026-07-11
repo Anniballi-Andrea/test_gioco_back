@@ -8,12 +8,12 @@ import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
-import test_gioco.demo.classes.Deposit;
-import test_gioco.demo.classes.MapGrid;
-import test_gioco.demo.classes.Portal;
-import test_gioco.demo.classes.ResourceType;
-import test_gioco.demo.classes.TerrainType;
-import test_gioco.demo.classes.Tile;
+import test_gioco.demo.classes.map.Deposit;
+import test_gioco.demo.classes.map.MapGrid;
+import test_gioco.demo.classes.map.Portal;
+import test_gioco.demo.classes.map.Tile;
+import test_gioco.demo.enums.ResourceType;
+import test_gioco.demo.enums.TerrainType;
 
 @Service
 public class MapGeneratorService {

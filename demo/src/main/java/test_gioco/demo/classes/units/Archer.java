@@ -1,4 +1,4 @@
-package test_gioco.demo.classes;
+package test_gioco.demo.classes.units;
 
 public class Archer extends Unit {
     public Archer() {

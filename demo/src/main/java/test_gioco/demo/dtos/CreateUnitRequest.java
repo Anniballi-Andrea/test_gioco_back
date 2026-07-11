@@ -1,6 +1,6 @@
 package test_gioco.demo.dtos;
 
-import test_gioco.demo.classes.UnitType;
+import test_gioco.demo.enums.UnitType;
 
 public class CreateUnitRequest {
     private UnitType type;

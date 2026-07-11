@@ -2,14 +2,14 @@ package test_gioco.demo.services;
 
 import org.springframework.stereotype.Service;
 
-import test_gioco.demo.classes.Archer;
 import test_gioco.demo.classes.GameState;
-import test_gioco.demo.classes.Portal;
-import test_gioco.demo.classes.ResourceType;
-import test_gioco.demo.classes.Unit;
-import test_gioco.demo.classes.UnitType;
-import test_gioco.demo.classes.Warrior;
-import test_gioco.demo.classes.Wizard;
+import test_gioco.demo.classes.map.Portal;
+import test_gioco.demo.classes.units.Archer;
+import test_gioco.demo.classes.units.Unit;
+import test_gioco.demo.classes.units.Warrior;
+import test_gioco.demo.classes.units.Wizard;
+import test_gioco.demo.enums.ResourceType;
+import test_gioco.demo.enums.UnitType;
 import test_gioco.demo.exeptions.SpawnException;
 
 @Service
@@ -86,6 +86,9 @@ public class UnitService {
         unit.setId(nextUnitId++);
         unit.setX(x);
         unit.setY(y);
+        unit.setRemainingMovement(0);
+        unit.setHasExtracted(true);
+        unit.setHasAttacked(true);
 
         gameState.getUnits().add(unit);
 

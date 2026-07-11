@@ -1,4 +1,4 @@
-package test_gioco.demo.classes;
+package test_gioco.demo.enums;
 
 public enum UnitType {
     WARRIOR(ResourceType.RED_CRYSTAL, 25),

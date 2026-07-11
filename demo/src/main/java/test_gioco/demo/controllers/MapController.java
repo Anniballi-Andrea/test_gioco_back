@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import test_gioco.demo.classes.MapGrid;
+import test_gioco.demo.classes.map.MapGrid;
 import test_gioco.demo.services.MapGeneratorService;
 
 @Controller

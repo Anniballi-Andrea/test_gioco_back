@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import test_gioco.demo.classes.GameState;
-import test_gioco.demo.classes.MapGrid;
-import test_gioco.demo.classes.Portal;
-import test_gioco.demo.classes.Unit;
+import test_gioco.demo.classes.map.MapGrid;
+import test_gioco.demo.classes.map.Portal;
+import test_gioco.demo.classes.units.Unit;
 import test_gioco.demo.dtos.AttackRequest;
 import test_gioco.demo.dtos.CreateUnitRequest;
 import test_gioco.demo.dtos.MiningRequest;
