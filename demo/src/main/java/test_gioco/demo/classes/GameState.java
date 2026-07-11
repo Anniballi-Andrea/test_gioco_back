@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import test_gioco.demo.classes.map.MapGrid;
 import test_gioco.demo.classes.map.Portal;
+import test_gioco.demo.classes.monsters.Monster;
 import test_gioco.demo.classes.units.Unit;
 import test_gioco.demo.enums.ResourceType;
 
@@ -16,6 +17,7 @@ public class GameState {
     private final UUID gameId;
     private final MapGrid map;
     private final List<Unit> units;
+    private final List<Monster> monsters;
     private int currentTurn;
     private final Map<ResourceType, Integer> resources;
     private Portal portal;
@@ -24,6 +26,7 @@ public class GameState {
         this.gameId = UUID.randomUUID();
         this.map = map;
         this.units = new ArrayList<>();
+        this.monsters = new ArrayList<>();
         this.currentTurn = 1;
         this.resources = new HashMap<>();
         this.resources.put(ResourceType.RED_CRYSTAL, 50);
@@ -41,6 +44,10 @@ public class GameState {
 
     public List<Unit> getUnits() {
         return units;
+    }
+
+    public List<Monster> getMonsters() {
+        return monsters;
     }
 
     public int getCurrentTurn() {
