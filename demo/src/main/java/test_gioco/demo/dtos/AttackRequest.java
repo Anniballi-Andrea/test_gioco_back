@@ -1,23 +1,22 @@
 package test_gioco.demo.dtos;
 
 public class AttackRequest {
-    private long attackerId;
-    private long targetId;
+    private long unitId;
+    private long monsterId;
 
-    public long getAttackerId() {
-        return this.attackerId;
+    public long getUnitId() {
+        return unitId;
     }
 
-    public void setAttackerId(long attackerId) {
-        this.attackerId = attackerId;
+    public void setUnitId(long unitId) {
+        this.unitId = unitId;
     }
 
-    public long getTargetId() {
-        return this.targetId;
+    public long getMonsterId() {
+        return monsterId;
     }
 
-    public void setTargetId(long targetId) {
-        this.targetId = targetId;
+    public void setMonsterId(long monsterId) {
+        this.monsterId = monsterId;
     }
-
 }

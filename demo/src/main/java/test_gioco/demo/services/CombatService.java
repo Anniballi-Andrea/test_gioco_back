@@ -3,43 +3,46 @@ package test_gioco.demo.services;
 import org.springframework.stereotype.Service;
 
 import test_gioco.demo.classes.GameState;
+import test_gioco.demo.classes.monsters.Monster;
 import test_gioco.demo.classes.units.Unit;
+import test_gioco.demo.dtos.AttackResult;
 
 @Service
 public class CombatService {
 
-    private final UnitService unitService;
+    public AttackResult executeAttack(GameState gameState, long attackerUnitId, long targetMonsterId) {
 
-    public CombatService(UnitService unitService) {
-        this.unitService = unitService;
-    }
+        Unit attacker = gameState.getUnits().stream()
+                .filter(u -> u.getId() == attackerUnitId)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Attaccante non trovato"));
 
-    public void attack(GameState gameState, Unit attacker, Unit target) {
+        Monster target = gameState.getMonsters().stream()
+                .filter(m -> m.getId() == targetMonsterId)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Mostro non trovato"));
 
-        if (attacker == null || target == null || attacker.isHasAttacked()) {
-            return;
+        if (attacker.isHasAttacked() || attacker.isHasExtracted()) {
+            throw new IllegalStateException("L'unità ha già attaccato questo turno");
         }
 
-        int deltaX = Math.abs(attacker.getX() - target.getX());
-        int deltaY = Math.abs(attacker.getX() - target.getY());
-
-        if (deltaX > attacker.getAttackRange() || deltaY > attacker.getAttackRange()) {
-            return;
+        int distance = Math.max(Math.abs(attacker.getX() - target.getX()), Math.abs(attacker.getY() - target.getY()));
+        if (distance > attacker.getAttackRange()) {
+            throw new IllegalStateException("Il mostro è fuori portata");
         }
 
-        int damage = attacker.getAttack() - target.getDefense();
+        int damageDealt = Math.max(1, attacker.getAttack() - target.getDefense());
 
-        if (damage < 1) {
-            damage = 1;
-        }
-
-        int newHp = target.getHp() - damage;
+        int newHp = target.getHp() - damageDealt;
         target.setHp(newHp);
 
-        if (newHp <= 0) {
-            unitService.removeUnit(gameState, target.getId());
+        attacker.setHasAttacked(true);
+
+        boolean isDead = newHp <= 0;
+        if (isDead) {
+            gameState.getMonsters().remove(target);
         }
 
-        attacker.setHasAttacked(true);
+        return new AttackResult(damageDealt, Math.max(0, newHp), isDead);
     }
 }

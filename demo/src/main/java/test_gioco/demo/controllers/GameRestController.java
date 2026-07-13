@@ -118,19 +118,16 @@ public class GameRestController {
     }
 
     @PostMapping("/attack")
-    public ResponseEntity<GameState> attackUnit(@RequestBody AttackRequest dto) {
+    public ResponseEntity<?> attackUnit(@RequestBody AttackRequest dto) {
         if (gameState == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Unit attacker = unitService.findUnit(gameState, dto.getAttackerId());
-        Unit target = unitService.findUnit(gameState, dto.getTargetId());
-
-        if (attacker == null || target == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+            combatService.executeAttack(gameState, dto.getUnitId(), dto.getMonsterId());
+            return new ResponseEntity<>(gameState, HttpStatus.OK);
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-
-        combatService.attack(gameState, attacker, target);
-        return new ResponseEntity<>(gameState, HttpStatus.OK);
     }
 
     @PostMapping("/extract")
