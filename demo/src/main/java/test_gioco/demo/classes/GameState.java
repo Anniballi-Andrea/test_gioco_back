@@ -21,6 +21,7 @@ public class GameState {
     private int currentTurn;
     private final Map<ResourceType, Integer> resources;
     private Portal portal;
+    private int spawnPower;
 
     public GameState(MapGrid map) {
         this.gameId = UUID.randomUUID();
@@ -32,6 +33,7 @@ public class GameState {
         this.resources.put(ResourceType.RED_CRYSTAL, 50);
         this.resources.put(ResourceType.BLUE_CRYSTAL, 50);
         this.resources.put(ResourceType.GREEN_CRYSTAL, 50);
+        this.spawnPower = 10;
     }
 
     public UUID getGameId() {
@@ -70,4 +72,15 @@ public class GameState {
         this.portal = portal;
     }
 
+    public int getSpawnPower() {
+        return this.spawnPower;
+    }
+
+    public void reduceSpawnPower(int value) {
+        this.spawnPower -= value;
+    }
+
+    public void addSpawnPower(int value) {
+        this.spawnPower += value;
+    }
 }

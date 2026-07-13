@@ -20,7 +20,7 @@ import test_gioco.demo.dtos.AttackRequest;
 import test_gioco.demo.dtos.CreateUnitRequest;
 import test_gioco.demo.dtos.MiningRequest;
 import test_gioco.demo.dtos.MoveRequest;
-import test_gioco.demo.exeptions.SpawnException;
+import test_gioco.demo.exceptions.SpawnException;
 import test_gioco.demo.services.CombatService;
 import test_gioco.demo.services.MapGeneratorService;
 import test_gioco.demo.services.MiningService;

@@ -10,7 +10,7 @@ import test_gioco.demo.classes.units.Warrior;
 import test_gioco.demo.classes.units.Wizard;
 import test_gioco.demo.enums.ResourceType;
 import test_gioco.demo.enums.UnitType;
-import test_gioco.demo.exeptions.SpawnException;
+import test_gioco.demo.exceptions.SpawnException;
 
 @Service
 public class UnitService {
@@ -45,6 +45,9 @@ public class UnitService {
     }
 
     public void createUnit(GameState gameState, UnitType type, int x, int y) {
+        if (gameState.getSpawnPower() < type.getSpawnPowerCost()) {
+            throw new SpawnException("Hai esaurito lo spazio necessario");
+        }
 
         if (!isAdjacentToPortal(gameState, x, y)) {
             throw new SpawnException("Il portale è troppo lontano.");
@@ -91,6 +94,7 @@ public class UnitService {
         unit.setHasAttacked(true);
 
         gameState.getUnits().add(unit);
+        gameState.reduceSpawnPower(type.getSpawnPowerCost());
 
     }
 
