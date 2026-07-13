@@ -1,16 +1,21 @@
 package test_gioco.demo.services;
 
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.stereotype.Service;
 
 import test_gioco.demo.classes.GameState;
 import test_gioco.demo.classes.monsters.Monster;
 import test_gioco.demo.classes.units.Unit;
 import test_gioco.demo.dtos.AttackResult;
+import test_gioco.demo.enums.ResourceType;
 
 @Service
 public class CombatService {
 
     public AttackResult executeAttack(GameState gameState, long attackerUnitId, long targetMonsterId) {
+        Random random = new java.util.Random();
 
         Unit attacker = gameState.getUnits().stream()
                 .filter(u -> u.getId() == attackerUnitId)
@@ -40,6 +45,19 @@ public class CombatService {
 
         boolean isDead = newHp <= 0;
         if (isDead) {
+            int minDrop = target.getMinDropPower();
+            int maxDrop = target.getMaxDropPower();
+
+            List<ResourceType> allowedDrops = target.getType().getDroppableResources();
+
+            for (ResourceType resourceType : allowedDrops) {
+
+                int dropAmount = random.nextInt((maxDrop - minDrop) + 1) + minDrop;
+
+                int currentAmount = gameState.getResources().getOrDefault(resourceType, 0);
+                gameState.getResources().put(resourceType, currentAmount + dropAmount);
+            }
+
             gameState.getMonsters().remove(target);
         }
 
