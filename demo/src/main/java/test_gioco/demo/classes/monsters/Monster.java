@@ -21,6 +21,8 @@ public class Monster {
     protected int minDropPower;
     protected int maxDropPower;
 
+    protected int movement;
+
     public long getId() {
         return this.id;
     }
@@ -107,5 +109,9 @@ public class Monster {
 
     public void setMaxDropPower(int maxDropPower) {
         this.maxDropPower = maxDropPower;
+    }
+
+    public int getMovement() {
+        return this.movement;
     }
 }

@@ -13,6 +13,7 @@ public class Snake extends Monster {
         this.defense = 1;
         this.minDropPower = 10;
         this.maxDropPower = 15;
+        this.movement = 4;
     }
 
 }
