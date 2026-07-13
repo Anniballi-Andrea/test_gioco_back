@@ -8,7 +8,7 @@ public class Snake extends Monster {
         this.type = MonsterType.SNAKE;
         this.hp = 10;
         this.maxHp = 10;
-        this.attack = 3;
+        this.attack = 12;
         this.attackRange = 1;
         this.defense = 1;
         this.minDropPower = 10;

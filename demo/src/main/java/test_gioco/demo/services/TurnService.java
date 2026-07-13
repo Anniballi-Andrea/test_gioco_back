@@ -103,6 +103,25 @@ public class TurnService {
             } else {
                 takeRandomStep(monster, map, portal, monsters, units, dx, dy);
             }
+            Unit attackTarget = null;
+            int closestAttackDist = Integer.MAX_VALUE;
+
+            for (Unit unit : units) {
+                int dist = Math.max(Math.abs(monster.getX() - unit.getX()), Math.abs(monster.getY() - unit.getY()));
+                if (dist <= monster.getAttackRange() && dist < closestAttackDist) {
+                    closestAttackDist = dist;
+                    attackTarget = unit;
+                }
+            }
+            if (attackTarget != null) {
+                int damageDealt = Math.max(1, monster.getAttack() - attackTarget.getDefense());
+                int newHp = attackTarget.getHp() - damageDealt;
+                attackTarget.setHp(newHp);
+
+                if (newHp <= 0) {
+                    units.remove(attackTarget);
+                }
+            }
         }
     }
 

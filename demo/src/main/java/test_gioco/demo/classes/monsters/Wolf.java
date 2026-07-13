@@ -8,7 +8,7 @@ public class Wolf extends Monster {
         this.type = MonsterType.WOLF;
         this.hp = 15;
         this.maxHp = 15;
-        this.attack = 4;
+        this.attack = 10;
         this.attackRange = 1;
         this.defense = 2;
         this.minDropPower = 20;

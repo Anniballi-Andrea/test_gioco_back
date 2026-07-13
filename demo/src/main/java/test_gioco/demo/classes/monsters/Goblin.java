@@ -8,8 +8,8 @@ public class Goblin extends Monster {
         this.type = MonsterType.GOBLIN;
         this.hp = 12;
         this.maxHp = 12;
-        this.attack = 3;
-        this.attackRange = 1;
+        this.attack = 8;
+        this.attackRange = 4;
         this.defense = 1;
         this.minDropPower = 10;
         this.maxDropPower = 25;
