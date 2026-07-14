@@ -18,8 +18,8 @@ import test_gioco.demo.enums.TerrainType;
 @Service
 public class MapGeneratorService {
 
-    private static final int WIDTH = 80;
-    private static final int HEIGHT = 80;
+    private static final int WIDTH = 65;
+    private static final int HEIGHT = 65;
     private static final int TOTAL_TILES = WIDTH * HEIGHT;
 
     private static final double WATER_PERCENT = 0.15;

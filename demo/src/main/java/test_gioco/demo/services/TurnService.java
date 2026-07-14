@@ -119,6 +119,7 @@ public class TurnService {
                 attackTarget.setHp(newHp);
 
                 if (newHp <= 0) {
+                    gameState.addSpawnPower(attackTarget.getType().getSpawnPowerCost());
                     units.remove(attackTarget);
                 }
             }
