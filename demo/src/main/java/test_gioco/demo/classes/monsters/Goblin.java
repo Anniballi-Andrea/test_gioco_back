@@ -14,6 +14,7 @@ public class Goblin extends Monster {
         this.minDropPower = 10;
         this.maxDropPower = 25;
         this.movement = 3;
+        this.xpReward = 100;
     }
 
 }

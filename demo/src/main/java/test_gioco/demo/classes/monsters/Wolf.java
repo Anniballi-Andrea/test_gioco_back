@@ -14,6 +14,7 @@ public class Wolf extends Monster {
         this.minDropPower = 20;
         this.maxDropPower = 45;
         this.movement = 6;
+        this.xpReward = 100;
     }
 
 }

@@ -58,6 +58,11 @@ public class CombatService {
                 gameState.getResources().put(resourceType, currentAmount + dropAmount);
             }
 
+            int spawnPowerRefund = attacker.addExperience(target.getXpReward());
+            if (spawnPowerRefund > 0) {
+                gameState.addSpawnPower(spawnPowerRefund);
+            }
+
             gameState.getMonsters().remove(target);
         }
 

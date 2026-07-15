@@ -14,6 +14,7 @@ public class Snake extends Monster {
         this.minDropPower = 10;
         this.maxDropPower = 15;
         this.movement = 4;
+        this.xpReward = 100;
     }
 
 }

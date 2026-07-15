@@ -29,6 +29,12 @@ public class Unit {
     protected boolean hasAttacked;
     protected boolean hasExtracted;
 
+    protected int level = 1;
+    protected int experience = 0;
+    protected static final int MAX_LEVEL = 3;
+
+    protected int spawnPowerCost;
+
     public long getId() {
         return id;
     }
@@ -140,4 +146,70 @@ public class Unit {
     public int getMaxExtractionPower() {
         return this.maxExtractionPower;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getSpawnPowerCost() {
+        return this.spawnPowerCost;
+    }
+
+    public void setSpawnPowerCost(int spawnPowerCost) {
+        this.spawnPowerCost = spawnPowerCost;
+    }
+
+    public int addExperience(int amount) {
+        if (this.level >= MAX_LEVEL) {
+            return 0;
+        }
+
+        this.experience += amount;
+        int totalSpawnPowerRefunded = 0;
+
+        while (this.level < MAX_LEVEL && this.experience >= getXpNeededForNextLevel()) {
+            this.experience -= getXpNeededForNextLevel();
+
+            // Salviamo il costo prima del level up per calcolare la differenza
+            int previousCost = this.spawnPowerCost;
+
+            levelUp();
+
+            // Calcoliamo quanto spawn power è stato liberato
+            totalSpawnPowerRefunded += (previousCost - this.spawnPowerCost);
+        }
+
+        if (this.level >= MAX_LEVEL) {
+            this.experience = 0;
+        }
+
+        return totalSpawnPowerRefunded;
+    }
+
+    public int getXpNeededForNextLevel() {
+        return 100 * this.level;
+    }
+
+    protected void levelUp() {
+        this.level++;
+        applyStatGrowth();
+        this.hp = this.maxHp;
+    }
+
+    protected void applyStatGrowth() {
+
+    }
+
 }

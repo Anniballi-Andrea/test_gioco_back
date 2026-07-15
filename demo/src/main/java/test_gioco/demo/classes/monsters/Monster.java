@@ -23,6 +23,8 @@ public class Monster {
 
     protected int movement;
 
+    protected int xpReward;
+
     public long getId() {
         return this.id;
     }
@@ -113,5 +115,13 @@ public class Monster {
 
     public int getMovement() {
         return this.movement;
+    }
+
+    public int getXpReward() {
+        return this.xpReward;
+    }
+
+    public void setXpReward(int xp) {
+        this.xpReward = xp;
     }
 }
