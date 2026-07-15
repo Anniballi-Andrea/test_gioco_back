@@ -1,9 +1,10 @@
 package test_gioco.demo.enums;
 
 public enum UnitType {
-    WARRIOR(ResourceType.RED_CRYSTAL, 25, 2),
-    WIZARD(ResourceType.BLUE_CRYSTAL, 30, 3),
-    ARCHER(ResourceType.GREEN_CRYSTAL, 15, 2);
+    WARRIOR(ResourceType.RED_CRYSTAL, 25, 3),
+    WIZARD(ResourceType.BLUE_CRYSTAL, 30, 4),
+    ARCHER(ResourceType.GREEN_CRYSTAL, 15, 3),
+    EXPLORER(ResourceType.RED_CRYSTAL, 5, 1);
 
     private final ResourceType resource;
     private final int cost;

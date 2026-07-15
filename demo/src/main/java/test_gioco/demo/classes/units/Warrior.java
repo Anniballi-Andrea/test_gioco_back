@@ -11,6 +11,6 @@ public class Warrior extends Unit {
         remainingMovement = 4;
         attackRange = 1;
         minExtractionPower = 3;
-        maxExtractionPower = 16;
+        maxExtractionPower = 10;
     }
 }

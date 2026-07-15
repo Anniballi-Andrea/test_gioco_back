@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import test_gioco.demo.classes.GameState;
 import test_gioco.demo.classes.map.Portal;
 import test_gioco.demo.classes.units.Archer;
+import test_gioco.demo.classes.units.Explorer;
 import test_gioco.demo.classes.units.Unit;
 import test_gioco.demo.classes.units.Warrior;
 import test_gioco.demo.classes.units.Wizard;
@@ -45,6 +46,7 @@ public class UnitService {
     }
 
     public void createUnit(GameState gameState, UnitType type, int x, int y) {
+
         if (gameState.getSpawnPower() < type.getSpawnPowerCost()) {
             throw new SpawnException("Hai esaurito lo spazio necessario");
         }
@@ -78,11 +80,14 @@ public class UnitService {
             case WIZARD:
                 unit = new Wizard();
                 break;
-            default:
-                throw new SpawnException("Tipo di unità non valido.");
             case ARCHER:
                 unit = new Archer();
                 break;
+            case EXPLORER:
+                unit = new Explorer();
+                break;
+            default:
+                throw new SpawnException("Tipo di unità non valido.");
         }
 
         unit.setType(type);
