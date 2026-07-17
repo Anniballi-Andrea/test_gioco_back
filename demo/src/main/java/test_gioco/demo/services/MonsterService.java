@@ -32,7 +32,11 @@ public class MonsterService {
             int x = random.nextInt(mapWidth);
             int y = random.nextInt(mapHeight);
 
-            if (mapGrid.getTile(y, x).getTerrain() != TerrainType.WATER && mapGrid.getDeposit(y, x) == null) {
+            test_gioco.demo.enums.TerrainType terrain = mapGrid.getTile(y, x).getTerrain();
+            if (terrain != TerrainType.SHALLOW_WATER
+                    && terrain != TerrainType.DEEP_WATER
+                    && terrain != TerrainType.WATER
+                    && mapGrid.getDeposit(y, x) == null) {
 
                 if (!isPositionOccupied(spawnedMonsters, x, y)) {
                     MonsterType randomType = monsterTypes[random.nextInt(monsterTypes.length)];

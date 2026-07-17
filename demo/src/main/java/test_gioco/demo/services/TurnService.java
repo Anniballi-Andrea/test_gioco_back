@@ -93,9 +93,23 @@ public class TurnService {
 
                     if (!bestMoves.isEmpty() && bestNextDistance < currentDist) {
                         int[] chosenMove = bestMoves.get(random.nextInt(bestMoves.size()));
-                        monster.setX(chosenMove[0]);
-                        monster.setY(chosenMove[1]);
-                        movesLeft--;
+                        TerrainType targetTerrain = map.getTile(chosenMove[1], chosenMove[0]).getTerrain();
+                        int stepCost = 1;
+
+                        if (targetTerrain == TerrainType.SHALLOW_WATER) {
+                            stepCost = 3; // Rallentamento a 1/3 (il costo triplica)
+                        } else if (targetTerrain == TerrainType.HIGH_MOUNTAIN) {
+                            stepCost = 2; // Rallentamento a 1/2 (il costo raddoppia)
+                        }
+
+                        if (movesLeft >= stepCost) {
+                            monster.setX(chosenMove[0]);
+                            monster.setY(chosenMove[1]);
+                            movesLeft -= stepCost;
+                        } else {
+                            break;
+                        }
+
                     } else {
                         break;
                     }
@@ -131,7 +145,7 @@ public class TurnService {
         if (nextX < 0 || nextX >= map.getWidth() || nextY < 0 || nextY >= map.getHeight()) {
             return false;
         }
-        if (map.getTile(nextY, nextX).getTerrain() == TerrainType.WATER) {
+        if (map.getTile(nextY, nextX).getTerrain() == TerrainType.DEEP_WATER) {
             return false;
         }
         if (map.getDeposit(nextY, nextX) != null) {
@@ -155,18 +169,42 @@ public class TurnService {
 
     private void takeRandomStep(Monster monster, MapGrid map, Portal portal, List<Monster> monsters, List<Unit> units,
             int[] dx, int[] dy) {
-        List<int[]> validMoves = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            int nextX = monster.getX() + dx[i];
-            int nextY = monster.getY() + dy[i];
-            if (isValidMove(nextX, nextY, map, portal, monsters, units, monster)) {
-                validMoves.add(new int[] { nextX, nextY });
+        int movesLeft = monster.getMovement();
+
+        while (movesLeft > 0) {
+            List<int[]> validMoves = new ArrayList<>();
+            List<Integer> movementCosts = new ArrayList<>();
+            for (int i = 0; i < 8; i++) {
+                int nextX = monster.getX() + dx[i];
+                int nextY = monster.getY() + dy[i];
+
+                if (isValidMove(nextX, nextY, map, portal, monsters, units, monster)) {
+                    TerrainType targetTerrain = map.getTile(nextY, nextX).getTerrain();
+                    int stepCost = 1;
+
+                    if (targetTerrain == TerrainType.SHALLOW_WATER) {
+                        stepCost = 3;
+                    } else if (targetTerrain == TerrainType.HIGH_MOUNTAIN) {
+                        stepCost = 2;
+                    }
+
+                    // Aggiunge la mossa solo se avanzano abbastanza punti movimento per pagarla
+                    if (movesLeft >= stepCost) {
+                        validMoves.add(new int[] { nextX, nextY });
+                        movementCosts.add(stepCost);
+                    }
+                }
             }
-        }
-        if (!validMoves.isEmpty()) {
-            int[] chosenMove = validMoves.get(random.nextInt(validMoves.size()));
+            if (validMoves.isEmpty()) {
+                break;
+            }
+            int randomIndex = random.nextInt(validMoves.size());
+            int[] chosenMove = validMoves.get(randomIndex);
+            int chosenCost = movementCosts.get(randomIndex);
+
             monster.setX(chosenMove[0]);
             monster.setY(chosenMove[1]);
+            movesLeft -= chosenCost;
         }
     }
 

@@ -3,6 +3,7 @@ package test_gioco.demo.services;
 import org.springframework.stereotype.Service;
 
 import test_gioco.demo.classes.GameState;
+import test_gioco.demo.classes.map.MapGrid;
 import test_gioco.demo.classes.map.Portal;
 import test_gioco.demo.classes.units.Archer;
 import test_gioco.demo.classes.units.Explorer;
@@ -10,6 +11,7 @@ import test_gioco.demo.classes.units.Unit;
 import test_gioco.demo.classes.units.Warrior;
 import test_gioco.demo.classes.units.Wizard;
 import test_gioco.demo.enums.ResourceType;
+import test_gioco.demo.enums.TerrainType;
 import test_gioco.demo.enums.UnitType;
 import test_gioco.demo.exceptions.SpawnException;
 
@@ -126,13 +128,32 @@ public class UnitService {
         int deltaY = y - unit.getY();
 
         int distanceSquared = (deltaX * deltaX) + (deltaY * deltaY);
-        int maxMovementSquared = unit.getRemainingMovement() * unit.getRemainingMovement();
-
-        if (distanceSquared > maxMovementSquared) {
-            return false;
-        }
 
         int cost = (int) Math.ceil(Math.sqrt(distanceSquared));
+
+        MapGrid mapGrid = gameState.getMap();
+        TerrainType targetTerrain = mapGrid.getTile(y, x).getTerrain();
+
+        if (targetTerrain == TerrainType.DEEP_WATER) {
+            return false;
+        }
+        if (targetTerrain == TerrainType.WATER) {
+            cost = cost * 3;
+        }
+
+        if (targetTerrain == TerrainType.SHALLOW_WATER) {
+            cost = cost * 2;
+        }
+
+        else if (targetTerrain == TerrainType.HIGH_MOUNTAIN) {
+            if (unit.getType() != UnitType.EXPLORER) {
+                cost = cost * 2;
+            }
+        }
+
+        if (unit.getRemainingMovement() < cost) {
+            return false;
+        }
 
         unit.setX(x);
         unit.setY(y);
