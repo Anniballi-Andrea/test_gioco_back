@@ -25,6 +25,7 @@ import test_gioco.demo.services.CombatService;
 import test_gioco.demo.services.MapGeneratorService;
 import test_gioco.demo.services.MiningService;
 import test_gioco.demo.services.MonsterService;
+import test_gioco.demo.services.PortalService;
 import test_gioco.demo.services.TurnService;
 import test_gioco.demo.services.UnitService;
 
@@ -38,18 +39,20 @@ public class GameRestController {
     private final TurnService turnService;
     private final MiningService miningService;
     private final MonsterService monsterService;
+    private final PortalService portalService;
 
     private GameState gameState;
 
     public GameRestController(MapGeneratorService mapGeneratorService,
             UnitService unitService, CombatService combatService, TurnService turnService,
-            MiningService miningService, MonsterService monsterService) {
+            MiningService miningService, MonsterService monsterService, PortalService portalService) {
         this.mapGeneratorService = mapGeneratorService;
         this.unitService = unitService;
         this.combatService = combatService;
         this.turnService = turnService;
         this.miningService = miningService;
         this.monsterService = monsterService;
+        this.portalService = portalService;
     }
 
     @PostMapping("/start")
@@ -62,7 +65,7 @@ public class GameRestController {
 
         this.gameState.getMonsters().addAll(monsters);
 
-        Portal portal = mapGeneratorService.generatePortal(newMap);
+        Portal portal = portalService.generatePortal(newMap);
 
         this.gameState.setPortal(portal);
 
